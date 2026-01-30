@@ -1,0 +1,37 @@
+@use '@angular/material' as mat;
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Toolbar */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.title {
+  font-size: 100px;
+    font-weight: bold;
+
+}
+
+/* Layout */
+.main-container {
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenedor REAL del dialog (Angular Material MDC) */
+.square-dialog .mdc-dialog__surface {
+  border-radius: 0 !important;
+}
+.square-dialog .mdc-button {
+  border-radius: 0 !important;
+}

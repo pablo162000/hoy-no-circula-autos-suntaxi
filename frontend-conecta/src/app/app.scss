@@ -1,0 +1,16 @@
+mat-toolbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.title {
+  color: var(--mat-sys-primary);
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-container {
+  padding: 24px;
+}
