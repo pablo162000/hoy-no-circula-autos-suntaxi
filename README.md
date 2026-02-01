@@ -1,6 +1,12 @@
 # Proyecto HOY NO CIRCULA - CONECTA
 ## Autor: Pablo Suntaxi Heredia
+El repositorio contiene **frontend y backend en un mismo proyecto**, organizados de la siguiente forma:
 
+- El backend se encuentra en la carpeta autos/
+
+- El frontend se encuentra en la carpeta frontend-conecta/
+
+---
 
 # Backend – Spring Boot
 
@@ -22,7 +28,7 @@ Aplicación Backend desarrollada en **Spring Boot** para el registro de vehícul
 
 ---
 
-## ⚙️ Configuración
+## Configuración
 
 El backend usa **variables de entorno** para la conexión a la base de datos.
 
