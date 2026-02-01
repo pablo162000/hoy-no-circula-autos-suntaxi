@@ -15,4 +15,12 @@ export const routes: Routes = [{
     loadComponent: () =>
         import('./pages/consultar-circulacion/consultar-circulacion')
             .then(m => m.ConsultarCirculacion)
-}];
+},
+{
+    path: 'listar-autos',
+    loadComponent: () =>
+        import('./pages/listar-autos/listar-autos')
+            .then(m => m.ListarAutos)
+}
+
+,];

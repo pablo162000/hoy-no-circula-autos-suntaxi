@@ -1,5 +1,6 @@
 package com.conecta.autos.service;
 
+import com.conecta.autos.dto.AutoDto;
 import com.conecta.autos.dto.AutoResponse;
 import com.conecta.autos.dto.CirculacionResponse;
 import com.conecta.autos.exception.*;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 @Service
 public class AutoServiceImpl implements AutoService {
@@ -18,7 +20,8 @@ public class AutoServiceImpl implements AutoService {
     private AutoRepository autoRepository;
 
     @Override
-    public CirculacionResponse consultarAuto(String placa, String fechaHora) {
+    public CirculacionResponse consultarAuto(String placa, LocalDateTime fechaConsulta) {
+
         validarPlaca(placa);
 
         Auto auto = autoRepository.findByPlaca(placa)
@@ -27,13 +30,6 @@ public class AutoServiceImpl implements AutoService {
                                 "El auto con placa " + placa + " no fue encontrado"
                         )
                 );
-
-        LocalDateTime fechaConsulta;
-        try {
-            fechaConsulta = LocalDateTime.parse(fechaHora);
-        } catch (DateTimeParseException ex) {
-            throw new InvalidFechaException("Formato de fecha inválido. Use ISO-8601 (yyyy-MM-ddTHH:mm)");
-        }
 
         if (fechaConsulta.isBefore(LocalDateTime.now())) {
             throw new InvalidFechaException("La fecha no puede ser anterior a la fecha actual");
@@ -45,7 +41,7 @@ public class AutoServiceImpl implements AutoService {
         }
 
         int ultimoNumeroPlaca = Character.getNumericValue(ultimoCaracter);
-        int dia = fechaConsulta.getDayOfWeek().getValue(); // 1=Lunes ... 7=Domingo
+        int dia = fechaConsulta.getDayOfWeek().getValue();
 
         if (dia > 5) {
             return new CirculacionResponse(
@@ -58,24 +54,12 @@ public class AutoServiceImpl implements AutoService {
 
         boolean tienePicoYPlaca = !puedeCircularPorPicoYPlaca(dia, ultimoNumeroPlaca);
 
-        if (tienePicoYPlaca) {
-
-
-            if (estaEnRestriccionHorario(fechaConsulta)) {
-                return new CirculacionResponse(
-                        placa,
-                        fechaConsulta,
-                        false,
-                        "Restricción de Pico y Placa por horario"
-                );
-            }
-
-            // Fuera del horario
+        if (tienePicoYPlaca && estaEnRestriccionHorario(fechaConsulta)) {
             return new CirculacionResponse(
                     placa,
                     fechaConsulta,
-                    true,
-                    "Fuera del horario de restricción"
+                    false,
+                    "Restricción de Pico y Placa por horario"
             );
         }
 
@@ -85,6 +69,20 @@ public class AutoServiceImpl implements AutoService {
                 true,
                 "Libre circulación"
         );
+    }
+
+    @Override
+    public List<AutoDto> listarAutos() {
+        return autoRepository.findAll()
+                .stream()
+                .map(auto -> new AutoDto(
+                        auto.getId(),
+                        auto.getPlaca(),
+                        auto.getColor(),
+                        auto.getModelo(),
+                        auto.getChasis()
+                ))
+                .toList();
     }
 
     // verificar si el auto puede circular según la restricción de Pico y Placa

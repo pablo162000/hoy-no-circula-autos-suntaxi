@@ -36,9 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 
-# =========================
-# Configuración sensible
-# =========================
-src/main/resources/application.properties
-src/main/resources/application.yml
-.env
+

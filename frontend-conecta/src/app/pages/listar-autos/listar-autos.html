@@ -1,0 +1,45 @@
+<div class="page-container">
+
+    <mat-card>
+        <br>
+        <mat-card-title class="card-title">Autos Registrados</mat-card-title>
+        <br>
+        <mat-form-field class="buscador">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="aplicarFiltro($event)" placeholder="Placa o chasis">
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let auto">{{ auto.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="placa">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Placa</th>
+                <td mat-cell *matCellDef="let auto">{{ auto.placa }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="chasis">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Chasis</th>
+                <td mat-cell *matCellDef="let auto">{{ auto.chasis }}</td>
+            </ng-container>
+            <ng-container matColumnDef="color">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Color</th>
+                <td mat-cell *matCellDef="let auto">{{ auto.color }}</td>
+            </ng-container>
+            <ng-container matColumnDef="modelo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
+                <td mat-cell *matCellDef="let auto">{{ auto.modelo }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+
+    </mat-card>
+</div>

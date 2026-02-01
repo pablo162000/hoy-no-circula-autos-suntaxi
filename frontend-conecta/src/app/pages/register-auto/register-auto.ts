@@ -5,6 +5,8 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { MatDialog } from '@angular/material/dialog';
 import { Auto } from '../../services/auto';
 import { ConfirmDialog } from '../../shared/confirm-dialog/confirm-dialog';
+import { ResultadoRegistradoDialog } from '../../shared/resultado-registrado-dialog/resultado-registrado-dialog';
+
 @Component({
   selector: 'app-register-auto',
   imports: [CommonModule,
@@ -44,12 +46,24 @@ export class RegisterAuto {
       if (confirmado) {
         this.autoService.guardarAuto(this.form.value)
           .subscribe({
-            next: () => {
-              alert('Vehículo guardado correctamente');
+            next: (response) => {
+              this.dialog.open(ResultadoRegistradoDialog, {
+                width: '420px',
+                data: response,
+                panelClass: 'square-dialog'
+              });
+
               this.form.reset();
             },
-            error: () => {
-              alert('Error al guardar el vehículo');
+            error: (error) => {
+              this.dialog.open(ResultadoRegistradoDialog, {
+                width: '420px',
+                data: {
+                  error: true,
+                  message: error?.error?.message || 'Ocurrió un error inesperado'
+                },
+                panelClass: 'square-dialog'
+              });
             }
           });
       }

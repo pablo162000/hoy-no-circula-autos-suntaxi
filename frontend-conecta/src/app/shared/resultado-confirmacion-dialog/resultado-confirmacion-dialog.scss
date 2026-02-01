@@ -1,0 +1,17 @@
+.resultado {
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.resultado.ok {
+  color: green;
+}
+
+.resultado.error {
+  color: red;
+}
+
+.error-message {
+  color: red;
+  font-weight: 500;
+}

@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface AutoRepository extends JpaRepository<Auto, String> {
 
     Optional<Auto> findByPlaca(String placa);
+
     Optional<Auto> findByChasis(String placa);
 
 }

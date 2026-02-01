@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>
+  {{ data.error ? 'Error' : 'Resultado de Circulación' }}
+</h2>
+
+<mat-dialog-content>
+
+  <!-- CASO ERROR -->
+  <ng-container *ngIf="data.error; else resultadoOk">
+    <p class="error-message">
+      {{ data.message }}
+    </p>
+  </ng-container>
+
+  <!-- CASO ÉXITO -->
+  <ng-template #resultadoOk>
+    <p><strong>Placa:</strong> {{ data.placa }}</p>
+
+    <p class="resultado" [class.ok]="data.puedeCircular" [class.error]="!data.puedeCircular">
+      {{ data.puedeCircular ? 'Puede circular' : 'No puede circular' }}
+    </p>
+
+    <p><strong>Motivo:</strong> {{ data.motivo }}</p>
+  </ng-template>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>
+    Cerrar
+  </button>
+</mat-dialog-actions>

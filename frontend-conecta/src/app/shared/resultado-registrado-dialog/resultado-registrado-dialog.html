@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>
+  {{ data.error ? 'Error' : 'Vehículo registrado' }}
+</h2>
+
+<mat-dialog-content>
+
+  <!-- ERROR -->
+  <ng-container *ngIf="data.error; else registroOk">
+    <p class="error-message">
+      {{ data.message }}
+    </p>
+  </ng-container>
+
+  <!-- ÉXITO -->
+  <ng-template #registroOk>
+    <p><strong>ID:</strong> {{ data.id }}</p>
+    <p><strong>Placa:</strong> {{ data.placa }}</p>
+    <p><strong>Chasis:</strong> {{ data.chasis }}</p>
+
+    <p class="success-message">
+      {{ data.mensaje }}
+    </p>
+  </ng-template>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>
+    Cerrar
+  </button>
+</mat-dialog-actions>
