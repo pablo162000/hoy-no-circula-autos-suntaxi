@@ -33,6 +33,13 @@ Aplicación Backend desarrollada en **Spring Boot** para el registro de vehícul
 El backend usa **variables de entorno** para la conexión a la base de datos.
 
 Configurar las variables de entorno **antes de ejecutar**, Por ejemplo:
+### Windows (CMD)
+```cmd
+set DB_URL=jdbc:postgresql://localhost:5432/autos
+set DB_USER=postgres
+set DB_PASSWORD="tu_password"
+```
+---
 
 ### Windows (PowerShell)
 ```powershell
