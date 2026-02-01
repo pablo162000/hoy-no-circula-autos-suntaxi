@@ -28,7 +28,7 @@ Aplicación Backend desarrollada en **Spring Boot** para el registro de vehícul
 
 ---
 
-## Configuración
+## Configuración (Para la Ejecucion)
 
 El backend usa **variables de entorno** para la conexión a la base de datos.
 
